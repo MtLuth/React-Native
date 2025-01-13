@@ -24,7 +24,7 @@ const SplashScreen: React.FC<Props> = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Xin chào, em là Nguyen Minh</Text>
+      <Text style={styles.title}>Xin chào, em là Mai Tan Tai</Text>
       <Text style={styles.subtitle}>Đang tải...</Text>
     </View>
   );
