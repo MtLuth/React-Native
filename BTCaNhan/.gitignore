@@ -75,3 +75,6 @@ yarn-error.log
 
 # Ignore environment variables
 .env
+
+/android/*
+/.vscode
