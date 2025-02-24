@@ -1,32 +1,29 @@
 import React, {useState} from 'react';
-import {
-  View,
-  TextInput,
-  Button,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import {View, TextInput, Button, StyleSheet} from 'react-native';
 import axios from 'axios';
+import {showErrorMessage, showSuccessMessage} from '../utils/ToastMessage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-axios.defaults.baseURL = 'http://192.168.2.47:5000';
+axios.defaults.baseURL = 'http://192.168.1.138:8080';
 
 const LoginScreen = ({navigation}: {navigation: any}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('/api/auth/login', {email, password});
-      setMessage(response.data.message);
+      const response = await axios.post('/api/v1/auth/login', {
+        email,
+        password,
+      });
+      showSuccessMessage(response?.data.message);
+      await AsyncStorage.setItem('accessToken', response?.data.token);
       navigation.navigate('Home');
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
-        setMessage(error.response.data.error);
+        showErrorMessage(error.response?.data.message);
       } else {
         console.error('Unexpected error:', error);
-        setMessage('An unexpected error occurred');
       }
     }
   };
@@ -47,7 +44,7 @@ const LoginScreen = ({navigation}: {navigation: any}) => {
         secureTextEntry
       />
       <Button title="Login" onPress={handleLogin} />
-      <View style={styles.buttonContainer}>
+      {/* <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={styles.customButton}
           onPress={() => navigation.navigate('Register')}>
@@ -58,8 +55,7 @@ const LoginScreen = ({navigation}: {navigation: any}) => {
           onPress={() => navigation.navigate('ForgotPassword')}>
           <Text style={styles.customButtonText}>Forgot Password</Text>
         </TouchableOpacity>
-      </View>
-      {message ? <Text>{message}</Text> : null}
+      </View> */}
     </View>
   );
 };
