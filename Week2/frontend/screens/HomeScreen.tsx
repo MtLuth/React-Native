@@ -10,9 +10,9 @@ const HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
       <View style={styles.middle}></View>
       <View style={styles.footer}>
         <TouchableOpacity
-          style={styles.loginButton}
-          onPress={() => navigation.navigate('Login')}>
-          <Text style={styles.loginButtonText}>Login</Text>
+          style={styles.profileButton}
+          onPress={() => navigation.navigate('Profile')}>
+          <Text style={styles.profileButtonText}>Profile</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -22,18 +22,18 @@ const HomeScreen: React.FC<{navigation: any}> = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff', // Màu nền trắng
+    backgroundColor: '#fff',
   },
   header: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#6363c9', // Màu nền xanh
+    backgroundColor: '#6363c9',
   },
   headerText: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#fff', // Màu chữ trắng
+    color: '#fff',
   },
   middle: {
     flex: 2,
@@ -44,17 +44,17 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     paddingRight: 16,
   },
-  loginButton: {
-    backgroundColor: '#fff', // Nền màu trắng
+  profileButton: {
+    backgroundColor: '#fff',
     padding: 10,
     borderRadius: 5,
     borderWidth: 1,
     borderColor: 'gray',
   },
-  loginButtonText: {
-    color: '#000', // Chữ đen
+  profileButtonText: {
+    color: '#000',
     fontSize: 16,
-    fontWeight: 'bold', // Chữ in đậm
+    fontWeight: 'bold',
   },
 });
 

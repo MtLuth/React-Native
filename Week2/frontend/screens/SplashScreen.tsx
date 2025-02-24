@@ -3,6 +3,7 @@ import {View, Text, StyleSheet} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../navigation/AppNavigator'; // Adjust the import path as needed
 import {RouteProp} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type SplashScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -17,8 +18,13 @@ interface Props {
 
 const SplashScreen: React.FC<Props> = ({navigation}) => {
   useEffect(() => {
-    setTimeout(() => {
-      navigation.replace('Onboard');
+    setTimeout(async () => {
+      const accessToken = await AsyncStorage.getItem('accessToken');
+      if (accessToken) {
+        navigation.replace('Home');
+      } else {
+        navigation.replace('Onboard');
+      }
     }, 5000);
   }, [navigation]);
 
